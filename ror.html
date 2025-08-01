@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RoR Calculator (Seconds)</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: sans-serif;
+      background: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Rate of Rise Calculator</h2>
+    <label>
+      Start Temp (°F):
+      <input type="number" id="tempStart">
+    </label>
+    <label>
+      End Temp (°F):
+      <input type="number" id="tempEnd">
+    </label>
+    <label>
+      Time Difference (seconds):
+      <input type="number" id="timeDiff" step="1">
+    </label>
+    <button onclick="calculateRoR()">Calculate RoR</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateRoR() {
+      const a = parseFloat(document.getElementById("tempStart").value);
+      const b = parseFloat(document.getElementById("tempEnd").value);
+      const c = parseFloat(document.getElementById("timeDiff").value);
+      if (isNaN(a) || isNaN(b) || isNaN(c) || c === 0) {
+        document.getElementById("result").innerText = "please enter valid numbers";
+        return;
+      }
+      const ror = (b - a) / (c / 60); // convert seconds to minutes
+      document.getElementById("result").innerText = `RoR: ${ror.toFixed(2)} °F/min`;
+    }
+  </script>
+</body>
+</html>
